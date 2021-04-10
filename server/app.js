@@ -25,6 +25,7 @@ dotenv.config({ path: './config.env' });
 connectDB();
 
 app.get('/', (req, res) => res.send('Hello World Test'));
+app.get('/test', (req, res) => res.send('Test Route'));
 
 app.get('/findId', async (req, res, next) => {
 	let id = req.query.data;
@@ -37,6 +38,6 @@ app.get('/findId', async (req, res, next) => {
 	}
 });
 
-app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
+// app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
 console.log(process.env.PORT);
-// app.listen(process.env.PORT || 7000, () => console.log(`App listening on port ${PORT}`));
+app.listen(process.env.PORT || 7000, () => console.log(`App listening on port ${PORT}`));

@@ -5,7 +5,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretSquareLeft, faCaretSquareRight } from '@fortawesome/fontawesome-free-solid';
 
 const Arrow = (props) => {
-	console.log(props, 'props in Arrow');
 	const [ state, setState ] = useContext(PodcastContext);
 	const page = state.page;
 
