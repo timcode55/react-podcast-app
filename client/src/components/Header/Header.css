@@ -1,0 +1,36 @@
+.top-section {
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.title {
+	text-align: center;
+	margin-top: 30px;
+	/* font-family: 'Roboto', sans-serif;
+	font-family: 'Oswald', sans-serif;
+	font-family: Arial, Helvetica, sans-serif; */
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 400;
+	font-size: 3em;
+}
+
+.selection-boxes {
+	display: flex;
+}
+
+.selection-box {
+	margin: 0 50px;
+}
+
+#selection {
+	height: 30px;
+	background-color: white;
+	font-size: 1em;
+}
+
+#selection2 {
+	background-color: white;
+	height: 30px;
+	font-size: 1em;
+}
