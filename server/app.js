@@ -29,7 +29,7 @@ app.get('/test', (req, res) => res.send('Test Route'));
 
 app.get('/findId', async (req, res, next) => {
 	let id = req.query.data;
-	console.log(id, 'id');
+	// console.log(id, 'id');
 	try {
 		const podcast = await Rating.findOne({ id }).lean();
 		res.send(podcast);
