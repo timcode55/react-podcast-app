@@ -1,0 +1,16 @@
+version: "3.9"  # optional since v1.27.0
+services:
+  pod-react-api:
+    container_name: backend
+    # image: node:14
+    build: ./
+    command: npm start
+    working_dir: /usr/src/podreact
+    depends_on:
+      - mongo
+    ports:
+      - "5000:5000"
+    volumes: 
+      - ./:/usr/src/podreact
+  mongo:
+    image: mongo
