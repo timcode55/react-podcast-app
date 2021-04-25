@@ -26,7 +26,7 @@ function App() {
 			}
 		).then((response) => {
 			response.json().then((data) => {
-				console.log(data, 'data in listennotes call see if doubling');
+				// console.log(data, 'data in listennotes call see if doubling');
 				const getRating = async () => {
 					for (let pod of data.podcasts) {
 						const id = pod.id;
@@ -36,6 +36,7 @@ function App() {
 								pod['rating'] = response.data.rating;
 								pod['numberOfRatings'] = response.data.numberOfRatings || 'N/A';
 								pod['itunes'] = response.data.itunes;
+								pod['description'] = response.data.description;
 							})
 							.catch(function(error) {
 								console.log(error);
