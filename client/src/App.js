@@ -36,7 +36,7 @@ function App() {
 								pod['rating'] = response.data.rating;
 								pod['numberOfRatings'] = response.data.numberOfRatings || 'N/A';
 								pod['itunes'] = response.data.itunes;
-								pod['description'] = response.data.description;
+								// pod['description'] = response.data.description;
 							})
 							.catch(function(error) {
 								console.log(error);
