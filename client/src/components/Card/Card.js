@@ -17,7 +17,9 @@ const Card = (props) => {
 					<h1>{podcast.title.substring(0, 52)}</h1>
 				</div>
 				<div className="desc">
-					<p className="ptext">{podcast.description.substring(0, 200).replace(/(<([^>]+)>)/gi, '')}...</p>
+					<p className="ptext">
+						{podcast.description && podcast.description.substring(0, 200).replace(/(<([^>]+)>)/gi, '')}...
+					</p>
 				</div>
 				<div className="podButtons">
 					<div className="webButton">

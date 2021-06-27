@@ -49,7 +49,28 @@ function App() {
 		});
 	};
 
-	return <Header podcasts={podcasts} getApiData={getApiData} />;
+	const getTopPodcasts = async (rating, numberRatings) => {
+		// const getBest = async () => {
+		await axios
+			.post(`http://localhost:7000/getTopPodcasts/?rating=${rating}&numberRatings=${numberRatings}`, {
+				body: {
+					todo: { rating }
+				}
+			})
+			.then(function(response) {
+				console.log(response.data, 'response.data 29 in Header');
+				setPodcasts(response.data);
+			})
+			.catch(function(error) {
+				console.log(error);
+			});
+
+		// await setPodcasts([ data.podcasts ]);
+		// };
+		// getBest();
+	};
+
+	return <Header podcasts={podcasts} getApiData={getApiData} getTopPodcasts={getTopPodcasts} />;
 }
 
 export default App;

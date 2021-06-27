@@ -3,13 +3,16 @@ import './CardList.css';
 import Card from '../Card/Card';
 import Arrow from '../arrow/Arrow';
 
-const CardList = (props) => {
+const CardList = ({ podcasts, topPodcasts, getData }) => {
+	console.log(topPodcasts, 'topPodcasts in CardList');
 	return (
 		<div className="outer-container">
 			<div className="container">
 				<div className="podcast-display">
-					{props.podcasts.podcasts[0] ? (
-						props.podcasts.podcasts[0].map((pod) => <Card key={pod.id} podcast={pod} />)
+					{topPodcasts ? (
+						topPodcasts.map((pod) => <Card key={pod.id} podcast={pod} />)
+					) : podcasts.podcasts[0] ? (
+						podcasts.podcasts[0].map((pod) => <Card key={pod.id} podcast={pod} />)
 					) : (
 						<div id="preloader">
 							<div id="loader" />
@@ -17,7 +20,7 @@ const CardList = (props) => {
 					)}
 				</div>
 			</div>
-			{props.podcasts.podcasts[0] ? <Arrow getData={props.getData} /> : null}
+			{podcasts.podcasts[0] ? <Arrow getData={getData} showArrow={topPodcasts} /> : null}
 		</div>
 	);
 };
