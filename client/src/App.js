@@ -7,6 +7,7 @@ import { PodcastContext } from './context/PodcastContext';
 function App() {
 	const [ podcasts, setPodcasts ] = useState([]);
 	const [ state, setState ] = useContext(PodcastContext);
+	const [ isLoading, setIsLoading ] = useState(false);
 
 	useEffect(() => {
 		getApiData(67);
@@ -14,6 +15,8 @@ function App() {
 	}, []);
 
 	const getApiData = async (genreId, page) => {
+		setIsLoading(true);
+		setState({ ...state, isLoading: true });
 		await fetch(
 			`https://listen-api.listennotes.com/api/v2/best_podcasts?genre_id=${genreId}&page=${page}&region=us&safe_mode=0`,
 			{
@@ -43,6 +46,8 @@ function App() {
 							});
 					}
 					await setPodcasts([ data.podcasts ]);
+					await setIsLoading(false);
+					await setState({ ...state, isLoading: false });
 				};
 				getRating();
 			});
@@ -70,7 +75,7 @@ function App() {
 		// getBest();
 	};
 
-	return <Header podcasts={podcasts} getApiData={getApiData} getTopPodcasts={getTopPodcasts} />;
+	return <Header podcasts={podcasts} getApiData={getApiData} getTopPodcasts={getTopPodcasts} isLoading={isLoading} />;
 }
 
 export default App;

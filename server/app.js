@@ -63,17 +63,17 @@ app.post('/getTopPodcasts', async (req, res, next) => {
 	console.log(req.query.rating, 'req.query.rating');
 	console.log(req.query.numberRatings, 'req.query.#');
 	console.log(req.query.genre, 'req.query.genre');
+	console.log(typeof req.query.genre, 'TYPEOF req.query.genre');
 	let rating = req.query.rating;
 	let numberRatings = req.query.numberRatings;
 	let genre = req.query.genre;
-	console.log(genre, 'genre', typeof genre, 'typeofgenre');
 	try {
 		const topPodcasts = await Rating.find({
 			rating: { $gte: rating },
 			numberOfRatings: { $gte: numberRatings },
-			genre
+			listenNotesGenre: genre
 		}).lean();
-		// console.log(topPodcasts, 'topPodcasts');
+		console.log(topPodcasts, 'topPodcasts');
 		res.send(topPodcasts);
 	} catch (e) {
 		res.status(500).send();

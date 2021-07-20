@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import CardList from '../CardList/CardList';
 import { array1, array2, categoriesArray } from '../../utils/category-list';
 import { PodcastContext } from '../../context/PodcastContext';
-import { dbCategoryList } from '../../utils/dbCategoryList';
 import './Header.css';
 import axios from 'axios';
 
@@ -14,7 +13,7 @@ const Header = (props) => {
 	const [ rating, setRating ] = useState('');
 	const [ numberRatings, setNumberRatings ] = useState('');
 	const [ topPodcasts, setTopPodcasts ] = useState(null);
-	const [ genre, setGenre ] = useState('');
+	const [ genre, setGenre ] = useState('AI & Data Science');
 	const [ loader, setLoader ] = useState(true);
 	const [ dbCategories, setDbCategories ] = useState([]);
 
@@ -23,6 +22,7 @@ const Header = (props) => {
 	// });
 
 	useEffect(() => {
+		categoriesArray.unshift({ id: 0, name: '', parent_id: 0 });
 		setTimeout(() => setLoader(false), 6000);
 	}, []);
 
@@ -69,6 +69,7 @@ const Header = (props) => {
 
 	const handleGenreInput = (e) => {
 		e.preventDefault();
+		console.log(e.target.value, 'VALUE IN SELECT BOX IN GENRE 71**');
 		setGenre(e.target.value);
 		// setNumberRatings({ [e.target.name]: value });
 		// console.log(value, 'rating in Header');
@@ -77,6 +78,7 @@ const Header = (props) => {
 
 	const handleClick = async (e) => {
 		console.log(rating, 'rating on click');
+		console.log(genre, 'genre on click');
 		e.preventDefault();
 		await axios
 			.post(
@@ -128,7 +130,7 @@ const Header = (props) => {
 	// console.log(rating, 'rating');
 	// console.log(numberRatings, 'numberRatings');
 	// console.log(genre, 'genre');
-	console.log(dbCategories, 'DB CATEGORIES BEFORE RETURN 115');
+	// console.log(dbCategories, 'DB CATEGORIES BEFORE RETURN 115');
 	return (
 		<div>
 			<div className="top-section">
@@ -195,7 +197,7 @@ const Header = (props) => {
 						<label>
 							<p>Genre</p>
 							<select id="selection" name="scripts" onChange={handleGenreInput}>
-								{dbCategoryList.map((item) => {
+								{categoriesArray.map((item) => {
 									return (
 										<option key={item.id} value={item.name}>
 											{item.name}
