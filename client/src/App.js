@@ -7,7 +7,6 @@ import { PodcastContext } from './context/PodcastContext';
 function App() {
 	const [ podcasts, setPodcasts ] = useState([]);
 	const [ state, setState ] = useContext(PodcastContext);
-	const [ isLoading, setIsLoading ] = useState(false);
 
 	useEffect(() => {
 		getApiData(67);
@@ -15,8 +14,6 @@ function App() {
 	}, []);
 
 	const getApiData = async (genreId, page) => {
-		setIsLoading(true);
-		setState({ ...state, isLoading: true });
 		await fetch(
 			`https://listen-api.listennotes.com/api/v2/best_podcasts?genre_id=${genreId}&page=${page}&region=us&safe_mode=0`,
 			{
@@ -46,36 +43,34 @@ function App() {
 							});
 					}
 					await setPodcasts([ data.podcasts ]);
-					await setIsLoading(false);
-					await setState({ ...state, isLoading: false });
 				};
 				getRating();
 			});
 		});
 	};
 
-	const getTopPodcasts = async (rating, numberRatings) => {
-		// const getBest = async () => {
-		await axios
-			.post(`http://localhost:7000/getTopPodcasts/?rating=${rating}&numberRatings=${numberRatings}`, {
-				body: {
-					todo: { rating }
-				}
-			})
-			.then(function(response) {
-				console.log(response.data, 'response.data 29 in Header');
-				setPodcasts(response.data);
-			})
-			.catch(function(error) {
-				console.log(error);
-			});
+	// const getTopPodcasts = async (rating, numberRatings) => {
+	// 	// const getBest = async () => {
+	// 	await axios
+	// 		.post(`http://localhost:7000/getTopPodcasts/?rating=${rating}&numberRatings=${numberRatings}`, {
+	// 			body: {
+	// 				todo: { rating }
+	// 			}
+	// 		})
+	// 		.then(function(response) {
+	// 			console.log(response.data, 'response.data 29 in Header');
+	// 			setPodcasts(response.data);
+	// 		})
+	// 		.catch(function(error) {
+	// 			console.log(error);
+	// 		});
 
-		// await setPodcasts([ data.podcasts ]);
-		// };
-		// getBest();
-	};
+	// 	// await setPodcasts([ data.podcasts ]);
+	// 	// };
+	// 	// getBest();
+	// };
 
-	return <Header podcasts={podcasts} getApiData={getApiData} getTopPodcasts={getTopPodcasts} isLoading={isLoading} />;
+	return <Header podcasts={podcasts} getApiData={getApiData} />;
 }
 
 export default App;

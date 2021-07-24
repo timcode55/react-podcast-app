@@ -72,6 +72,7 @@ app.post('/getTopPodcasts', async (req, res, next) => {
 			rating: { $gte: rating },
 			numberOfRatings: { $gte: numberRatings },
 			listenNotesGenre: genre
+			// genre
 		}).lean();
 		console.log(topPodcasts, 'topPodcasts');
 		res.send(topPodcasts);

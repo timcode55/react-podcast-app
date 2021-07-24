@@ -79,6 +79,9 @@ const Header = (props) => {
 	const handleClick = async (e) => {
 		console.log(rating, 'rating on click');
 		console.log(genre, 'genre on click');
+		console.log(numberRatings, 'numberRatings on click');
+		let stringGenre = encodeURIComponent(genre);
+		console.log(stringGenre, 'stringGenre');
 		e.preventDefault();
 		await axios
 			.post(
@@ -131,6 +134,7 @@ const Header = (props) => {
 	// console.log(numberRatings, 'numberRatings');
 	// console.log(genre, 'genre');
 	// console.log(dbCategories, 'DB CATEGORIES BEFORE RETURN 115');
+	console.log(category, 'CATEGORY');
 	return (
 		<div>
 			<div className="top-section">
@@ -223,7 +227,7 @@ const Header = (props) => {
 				podcasts={props}
 				category={parseInt(value)}
 				getData={props.getApiData}
-				loader={loader}
+				isLoading={props.isLoading}
 			/>
 		</div>
 	);
