@@ -81,5 +81,27 @@ app.post('/getTopPodcasts', async (req, res, next) => {
 	}
 });
 
+// app.get('/getRecommend', async (req, res, next) => {
+// 	// console.log(req.query.rating, 'req.query.rating');
+// 	// console.log(req.query.numberRatings, 'req.query.#');
+// 	// console.log(req.query.genre, 'req.query.genre');
+// 	// console.log(typeof req.query.genre, 'TYPEOF req.query.genre');
+// 	let id = req.query.id;
+//   console.log(id, 'ID')
+
+// 	try {
+// 		const getRecommend = await Rating.find({
+// 			id
+// 			numberOfRatings: { $gte: numberRatings },
+// 			listenNotesGenre: genre
+// 			// genre
+// 		}).lean();
+// 		console.log(topPodcasts, 'topPodcasts');
+// 		res.send(topPodcasts);
+// 	} catch (e) {
+// 		res.status(500).send();
+// 	}
+// });
+
 // app.listen(PORT, () => console.log(`App listening on port ${PORT}`));
 app.listen(process.env.PORT || 7000, () => console.log(`App listening on port ${PORT}`));

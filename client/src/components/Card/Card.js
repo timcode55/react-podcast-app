@@ -3,13 +3,19 @@ import './Card.css';
 import icons8 from '../../images/Hashtag-26-52px/icons8-hashtag-52.png';
 import rating from '../../images/Star-24-48px/icons8-star-48.png';
 
-const Card = (props) => {
-	const { podcast } = props;
-	// console.log(podcast, 'podcast props in card');
+const Card = ({ podcast, getRecommend, recommend }) => {
+	// const { podcast } = props;
+	console.log(podcast, 'podcast props in card WILL UPDATE******');
+
+	const test = () => {
+		getRecommend('42c4bad366a44c9085c9e4342aa9a441');
+		console.log('clicked card');
+	};
 
 	return (
 		<div className="div-style">
-			<div className="podcontainer">
+			<div className="podcontainer" onClick={test}>
+				{/* <a href={podcast.listennotes_url} target="_blank" rel="noreferrer"> */}
 				<a href={podcast.listennotes_url} target="_blank" rel="noreferrer">
 					<img className="podimage" src={podcast.image} alt="pod1" />
 				</a>
