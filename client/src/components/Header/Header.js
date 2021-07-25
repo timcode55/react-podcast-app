@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import CardList from '../CardList/CardList';
 import { array1, array2, categoriesArray } from '../../utils/category-list';
+import { dbCategoryList } from '../../utils/dbCategoryList';
 import { PodcastContext } from '../../context/PodcastContext';
 import './Header.css';
 import axios from 'axios';
@@ -85,7 +86,7 @@ const Header = (props) => {
 		e.preventDefault();
 		await axios
 			.post(
-				`http://localhost:7000/getTopPodcasts/?rating=${rating}&numberRatings=${numberRatings}&genre=${genre}`,
+				`http://localhost:7000/getTopPodcasts/?rating=${rating}&numberRatings=${numberRatings}&genre=${stringGenre}`,
 				{
 					body: {
 						todo: { rating }
@@ -201,7 +202,7 @@ const Header = (props) => {
 						<label>
 							<p>Genre</p>
 							<select id="selection" name="scripts" onChange={handleGenreInput}>
-								{categoriesArray.map((item) => {
+								{dbCategoryList.map((item) => {
 									return (
 										<option key={item.id} value={item.name}>
 											{item.name}

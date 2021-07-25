@@ -71,9 +71,11 @@ app.post('/getTopPodcasts', async (req, res, next) => {
 		const topPodcasts = await Rating.find({
 			rating: { $gte: rating },
 			numberOfRatings: { $gte: numberRatings },
-			listenNotesGenre: genre
-			// genre
-		}).lean();
+			// listenNotesGenre: genre
+			genre
+		})
+			.sort({ rating: -1, numberRatings: -1 })
+			.lean();
 		console.log(topPodcasts, 'topPodcasts');
 		res.send(topPodcasts);
 	} catch (e) {
