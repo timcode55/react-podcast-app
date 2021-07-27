@@ -132,29 +132,29 @@ const Header = (props) => {
 
 	const test = (e) => {
 		e.preventDefault();
-		props.getRecommend();
-	};
-
-	const getRecommend = (e) => {
-		// e.preventDefault();
 		props.getRecommend('11d262e4a57d46c2bc939449a43961c4');
-		// await axios
-		// 	.get(`http://localhost:7000/getRecommend/?id=${id}`)
-		// 	.then(function(response) {
-		// 		console.log(response.data, 'response.data 97 in Header');
-		// 		setDbCategories(response.data);
-		// 	})
-		// 	.catch(function(error) {
-		// 		console.log(error);
-		// 	});
-		// const value = e.target.value;
-		// setRating(value);
-
-		// setNumberRatings({ [e.target.name]: value });
-		// console.log(rating, 'rating in Header');
-		// console.log(rating, 'rating in Header');
-		// props.getTopPodcasts(value, 100);
 	};
+
+	// const getRecommend = (e) => {
+	// 	// e.preventDefault();
+	// 	props.getRecommend('11d262e4a57d46c2bc939449a43961c4');
+	// 	// await axios
+	// 	// 	.get(`http://localhost:7000/getRecommend/?id=${id}`)
+	// 	// 	.then(function(response) {
+	// 	// 		console.log(response.data, 'response.data 97 in Header');
+	// 	// 		setDbCategories(response.data);
+	// 	// 	})
+	// 	// 	.catch(function(error) {
+	// 	// 		console.log(error);
+	// 	// 	});
+	// 	// const value = e.target.value;
+	// 	// setRating(value);
+
+	// 	// setNumberRatings({ [e.target.name]: value });
+	// 	// console.log(rating, 'rating in Header');
+	// 	// console.log(rating, 'rating in Header');
+	// 	// props.getTopPodcasts(value, 100);
+	// };
 
 	// console.log(rating, 'rating');
 	// console.log(numberRatings, 'numberRatings');
@@ -254,7 +254,7 @@ const Header = (props) => {
 				category={parseInt(value)}
 				getData={props.getApiData}
 				isLoading={props.isLoading}
-				getRecommend={getRecommend}
+				getRecommend={props.getRecommend}
 				recommendations={props.recommendations}
 			/>
 		</div>

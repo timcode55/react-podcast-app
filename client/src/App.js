@@ -50,19 +50,18 @@ function App() {
 		});
 	};
 
-	const getRecommend = async (episodeId, page) => {
-		episodeId = '11d262e4a57d46c2bc939449a43961c4';
-		await fetch(
-			`https://listen-api.listennotes.com/api/v2/podcasts/${'11d262e4a57d46c2bc939449a43961c4'}/recommendations`,
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					'X-ListenAPI-Key': process.env.REACT_APP_LISTEN_NOTES_API_KEY
-				},
-				credentials: 'same-origin'
-			}
-		).then((response) => {
+	const getRecommend = async (episodeId) => {
+		console.log(episodeId, 'EPISODEID');
+		console.log(typeof episodeId, ' TYPEOF EPISODEID');
+		// episodeId = '11d262e4a57d46c2bc939449a43961c4';
+		await fetch(`https://listen-api.listennotes.com/api/v2/podcasts/${episodeId}/recommendations`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'X-ListenAPI-Key': process.env.REACT_APP_LISTEN_NOTES_API_KEY
+			},
+			credentials: 'same-origin'
+		}).then((response) => {
 			response.json().then(async (data) => {
 				// console.log(response.data, 'response.data');
 				console.log(data.recommendations, 'data RECOMMENDATIONS*****');

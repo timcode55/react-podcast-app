@@ -54,7 +54,7 @@ const CardList = ({ podcasts, topPodcasts, getData, isLoading, getRecommend, rec
 							<div id="loader" />
 						</div>
 					)}
-					{recommendations && recommendations.map((pod) => <Card key={pod.id} podcast={pod} />)}
+					{/* {recommendations && recommendations.map((pod) => <Card key={pod.id} podcast={pod} />)} */}
 				</div>
 			</div>
 			{podcasts.podcasts[0] && !state.isLoading ? <Arrow getData={getData} showArrow={isLoading} /> : null}

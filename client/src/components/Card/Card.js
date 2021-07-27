@@ -5,16 +5,20 @@ import rating from '../../images/Star-24-48px/icons8-star-48.png';
 
 const Card = ({ podcast, getRecommend, recommend }) => {
 	// const { podcast } = props;
-	console.log(podcast, 'podcast props in card WILL UPDATE******');
+	// console.log(getRecommend, 'GETRECOMMEND IN CARD');
+	// console.log(podcast, 'podcast props in card WILL UPDATE******');
 
-	const test = () => {
-		getRecommend('42c4bad366a44c9085c9e4342aa9a441');
+	const test = (e) => {
+		const cardId = e.target.id;
+		getRecommend(cardId);
 		console.log('clicked card');
+		console.log(e.target.id, 'E.TARGET IN CARD');
+		console.log(typeof e.target.id, 'TYPEOF E.TARGET IN CARD');
 	};
 
 	return (
 		<div className="div-style">
-			<div className="podcontainer" onClick={test}>
+			<div className="podcontainer" onClick={test} id={podcast.id}>
 				{/* <a href={podcast.listennotes_url} target="_blank" rel="noreferrer"> */}
 				<a href={podcast.listennotes_url} target="_blank" rel="noreferrer">
 					<img className="podimage" src={podcast.image} alt="pod1" />
