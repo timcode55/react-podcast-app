@@ -29,7 +29,7 @@ const CardList = ({ podcasts, topPodcasts, getData, isLoading }) => {
 		<div className="outer-container">
 			<div className="container">
 				<div className="podcast-display">
-					{isLoading ? (
+					{state.isLoading ? (
 						<div id="preloader">
 							<div id="loader" />
 						</div>

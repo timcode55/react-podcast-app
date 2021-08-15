@@ -44,7 +44,7 @@ const Header = (props) => {
 
 	const handleChange = (e) => {
 		setLoader(true);
-		setState({ page: 1, category: e.target.value });
+		setState({ page: 1, category: Number(e.target.value) });
 		let findValue = Number(e.target.value);
 		let findCategory = categoriesArray.find((item) => item.id === findValue).name;
 		setCategory(findCategory);

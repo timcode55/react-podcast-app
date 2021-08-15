@@ -10,10 +10,13 @@ function App() {
 
 	useEffect(() => {
 		getApiData(67);
-		setState({ page: 1, category: 67 });
+		setState({ page: 1, category: 67, isLoading: false });
 	}, []);
 
 	const getApiData = async (genreId, page) => {
+		setState((prevState) => {
+			return { ...prevState, isLoading: true };
+		});
 		await fetch(
 			`https://listen-api.listennotes.com/api/v2/best_podcasts?genre_id=${genreId}&page=${page}&region=us&safe_mode=0`,
 			{
@@ -43,6 +46,9 @@ function App() {
 							});
 					}
 					await setPodcasts([ data.podcasts ]);
+					setState((prevState) => {
+						return { ...prevState, isLoading: false };
+					});
 				};
 				getRating();
 			});
