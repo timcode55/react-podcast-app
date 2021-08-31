@@ -34,3 +34,19 @@
 	height: 30px;
 	font-size: 1em;
 }
+
+.refine-header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 2rem;
+}
+
+.refine-button {
+	margin-left: 100px;
+}
+
+.refine-input {
+	height: 40px;
+	margin: 0 50px;
+}
