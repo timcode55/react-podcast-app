@@ -1,55 +1,83 @@
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import './App.css';
-import Header from './components/Header/Header';
-import { PodcastContext } from './context/PodcastContext';
+import React, { useState, useEffect, useContext } from "react";
+import axios from "axios";
+import "./App.css";
+import Header from "./components/Header/Header";
+import { PodcastContext } from "./context/PodcastContext";
+
+let cacheObject = {},
+  cacheArray = [];
 
 function App() {
-	const [ podcasts, setPodcasts ] = useState([]);
-	const [ state, setState ] = useContext(PodcastContext);
+  const [podcasts, setPodcasts] = useState([]);
+  const [genre, setGenre] = useState("");
+  const [state, setState] = useContext(PodcastContext);
+  const [status, setStatus] = useState("");
 
-	useEffect(() => {
-		getApiData(67);
-		setState({ page: 1, category: 67 });
-	}, []);
+  useEffect(() => {
+    if (!genre) {
+      getApiData(67);
+      setState({ page: 1, category: 67 });
+      cacheObject["67"] = getApiData(67) || [];
+      cacheArray.push(cacheObject);
+      setGenre("67");
+    } else {
+      getApiData();
+    }
+  }, []);
 
-	const getApiData = async (genreId, page) => {
-		await fetch(
-			`https://listen-api.listennotes.com/api/v2/best_podcasts?genre_id=${genreId}&page=${page}&region=us&safe_mode=0`,
-			{
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-					'X-ListenAPI-Key': process.env.REACT_APP_LISTEN_NOTES_API_KEY
-				},
-				credentials: 'same-origin'
-			}
-		).then((response) => {
-			response.json().then((data) => {
-				// console.log(data, 'data in listennotes call see if doubling');
-				const getRating = async () => {
-					for (let pod of data.podcasts) {
-						const id = pod.id;
-						await axios
-							.get(`http://localhost:7000/findId/?data=${id}`)
-							.then(function(response) {
-								pod['rating'] = response.data.rating;
-								pod['numberOfRatings'] = response.data.numberOfRatings || 'N/A';
-								pod['itunes'] = response.data.itunes;
-								// pod['description'] = response.data.description;
-							})
-							.catch(function(error) {
-								console.log(error);
-							});
-					}
-					await setPodcasts([ data.podcasts ]);
-				};
-				getRating();
-			});
-		});
-	};
+  const renderCache = async (genreId) => {
+    const data = cacheArray[0][`${genreId}`];
+    await setPodcasts([data]);
+  };
 
-	return <Header podcasts={podcasts} getApiData={getApiData} />;
+  const getApiData = async (genreId, page) => {
+    setStatus("loading");
+    await fetch(
+      `https://listen-api.listennotes.com/api/v2/best_podcasts?genre_id=${genreId}&page=${page}&region=us&safe_mode=0`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-ListenAPI-Key": process.env.REACT_APP_LISTEN_NOTES_API_KEY
+        },
+        credentials: "same-origin"
+      }
+    ).then((response) => {
+      response.json().then((data) => {
+        const getRating = async () => {
+          for (let pod of data.podcasts) {
+            const id = pod.id;
+            await axios
+              .get(`http://localhost:7000/findId/?data=${id}`)
+              .then(function (response) {
+                pod["rating"] = response.data.rating;
+                pod["numberOfRatings"] = response.data.numberOfRatings || "N/A";
+                pod["itunes"] = response.data.itunes;
+                // pod['description'] = response.data.description;
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+          }
+          cacheObject[genreId] = data.podcasts || [];
+          await setGenre(genreId);
+          await setPodcasts([data.podcasts]);
+
+          setStatus("loaded");
+        };
+        getRating();
+      });
+    });
+  };
+  return (
+    <Header
+      podcasts={podcasts}
+      getApiData={getApiData}
+      renderCache={renderCache}
+      cache={cacheArray}
+      status={status}
+    />
+  );
 }
 
 export default App;
