@@ -28,6 +28,7 @@ function App() {
   const renderCache = async (genreId) => {
     const data = cacheArray[0][`${genreId}`];
     await setPodcasts([data]);
+    localStorage.setItem("podcasts", data[0][0]);
   };
 
   const getApiData = async (genreId, page) => {
@@ -69,6 +70,7 @@ function App() {
       });
     });
   };
+  console.log(podcasts, "PODCASTS WORK??");
   return (
     <Header
       podcasts={podcasts}
