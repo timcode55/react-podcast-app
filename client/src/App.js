@@ -26,12 +26,14 @@ function App() {
   }, []);
 
   const renderCache = async (genreId) => {
+    console.log("rendercache called");
     const data = cacheArray[0][`${genreId}`];
     await setPodcasts([data]);
     localStorage.setItem("podcasts", data[0][0]);
   };
 
   const getApiData = async (genreId, page) => {
+    console.log("getapidatacalled");
     setStatus("loading");
     await fetch(
       `https://listen-api.listennotes.com/api/v2/best_podcasts?genre_id=${genreId}&page=${page}&region=us&safe_mode=0`,
@@ -70,7 +72,6 @@ function App() {
       });
     });
   };
-  console.log(podcasts, "PODCASTS WORK??");
   return (
     <Header
       podcasts={podcasts}

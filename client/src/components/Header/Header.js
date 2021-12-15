@@ -5,7 +5,6 @@ import { PodcastContext } from "../../context/PodcastContext";
 import "./Header.css";
 
 const Header = (props) => {
-  console.log(props, "PROPS IN HEADER");
   const [state, setState] = useContext(PodcastContext);
   const [value, setValue] = useState("");
   const [category, setCategory] = useState("");
@@ -20,8 +19,9 @@ const Header = (props) => {
     setCategory(findCategory);
     if (props.cache[0][`${e.target.value}`]) {
       props.renderCache(e.target.value);
+    } else {
+      props.getApiData(e.target.value, 1);
     }
-    props.getApiData(e.target.value, 1);
   };
 
   return (
@@ -71,6 +71,7 @@ const Header = (props) => {
         category={parseInt(value)}
         getData={props.getApiData}
         status={props.status}
+        cache={props.cache}
       />
     </div>
   );
