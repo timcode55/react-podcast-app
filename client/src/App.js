@@ -49,7 +49,7 @@ function App() {
           for (let pod of data.podcasts) {
             const id = pod.id;
             await axios
-              .get(`http://localhost:7000/findId/?data=${id}`)
+              .get(`https://podreact.timpetrvalsky.com/findId/?data=${id}`)
               .then(function (response) {
                 pod["rating"] = response.data.rating;
                 pod["numberOfRatings"] = response.data.numberOfRatings || "N/A";
@@ -70,7 +70,6 @@ function App() {
       });
     });
   };
-  console.log(podcasts, "PODCASTS WORK??");
   return (
     <Header
       podcasts={podcasts}

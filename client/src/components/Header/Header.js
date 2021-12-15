@@ -5,7 +5,6 @@ import { PodcastContext } from "../../context/PodcastContext";
 import "./Header.css";
 
 const Header = (props) => {
-  console.log(props, "PROPS IN HEADER");
   const [state, setState] = useContext(PodcastContext);
   const [value, setValue] = useState("");
   const [category, setCategory] = useState("");
