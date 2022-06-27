@@ -13,14 +13,14 @@ const Header = (props) => {
     setValue(e.target.value);
     setState({ page: 1, category: e.target.value });
     let findValue = Number(e.target.value);
-    let findCategory = categoriesArray.find(
-      (item) => item.id === findValue
-    ).name;
+    let findCategory = categoriesArray.find((item) => item.id === findValue)
+      .name;
     setCategory(findCategory);
     if (props.cache[0][`${e.target.value}`]) {
       props.renderCache(e.target.value);
+    } else {
+      props.getApiData(e.target.value, 1);
     }
-    props.getApiData(e.target.value, 1);
   };
 
   return (
@@ -70,6 +70,7 @@ const Header = (props) => {
         category={parseInt(value)}
         getData={props.getApiData}
         status={props.status}
+        cache={props.cache}
       />
     </div>
   );
